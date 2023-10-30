@@ -1,5 +1,10 @@
 import React from 'react'
-const TodosList = ({todos,setTodos}) => {
+const TodosList = ({todos,setTodos,setEditTodo,setInput}) => {
+
+    const handleEdit = (id) => {
+            setEditTodo(id);
+            setInput(id)
+    }
 
     const handleDelete=({id})=>{
         setTodos(todos.filter((todo)=> todo.id !== id))
@@ -8,13 +13,13 @@ const TodosList = ({todos,setTodos}) => {
     <div>
         {
             todos.map((todo)=>(
+                <div className='display-todos'>
                 <li className='list' key={todo.id}>
                     <input className='input-field' type="text" value={todo.title} onChange={(e)=>e.preventDefault()} />
-                    <button className='btn' onClick={()=>handleDelete(todo)}>x</button>
-                    {/* <button onClick={()=>handleDelete(todo)}>x</button> */}
-                    {/* <TodoBtn onclick={add} value={"ADD"} /> */}
-                    {/* <TodoBtn onclick={handleDelete} value={"Delete"}/> */}
+                    <button className='btn' onClick={()=>handleEdit(todo)}>Edit</button>
+                    <button className='btn' onClick={()=>handleDelete(todo)}>Delete</button>
                 </li>
+                </div>
             ))
         }
     </div>

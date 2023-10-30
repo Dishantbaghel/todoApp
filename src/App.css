@@ -28,26 +28,46 @@
     width: 80%;
     margin: auto;
     background-color: rgb(49, 91, 218);
+    padding: 15px;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
   }
   .btn{
-    width: 14%;
-    padding: 9px;
+    font-size: 2vw;
+    padding: 5px;
     border-radius: 15px;
-    float: right;
     background-color: yellow;
+    margin-left: 5px;
   }
   .input-field{
-    width: 85%;
+    width: 80%;
     border-radius: 15px;
     /* height: 42px; */
-    font-size: 20px;
+    font-size: 2vw;
     padding: 5px;
     margin: auto;
   }
   .list{
     list-style-type: none;
     margin-top: 30px;
+  }
+
+  @media (max-width:1200px){
+    .input-field{
+      width: 70%;
+    }
+  }
+
+  @media (max-width:700px){
+    .input-field{
+      width: 100%;
+      display: block;
+    }
+
+    .display-todos{
+      background-color: red;
+      align-items: center;
+    }
+   
   }
