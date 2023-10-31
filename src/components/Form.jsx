@@ -38,7 +38,7 @@ const Form = ({input,setInput,todos,setTodos,editTodo,setEditTodo}) => {
   return (
     <form onSubmit={onFormSubmit}>
         <input className='input-field' type="text" placeholder='Enter todo here...' required value={input} onChange={onInputChange} />
-        <button className='btn' type='submit'>{editTodo?'Update':'Add'}</button>
+        <button className='btn' type='submit'>ADD</button>
     </form>
   )
 }
