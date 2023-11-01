@@ -1,46 +1,34 @@
-import React,{useEffect} from 'react'
-import{v4 as uuidv4} from "uuid"
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const Form = ({input,setInput,todos,setTodos,editTodo,setEditTodo}) => {
+const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo,errorMessage,setErrorMessage }) => {
+    
 
-    const updateTodo =(title,id)=>{
-        const newTodo = todos.map((todo)=>
-            todo.id === id ? {title,id} : todo
-        )
-        setTodos(newTodo)
-        setEditTodo("");
-    }
+    const onInputChange = (e) => {
+        setInput(e.target.value);
+        setErrorMessage('');
+    };
 
-    useEffect(()=>{
-        if(editTodo){
-            setInput(editTodo.title)
-        }
-        else{
-            setInput('')
-        }
-    },[setInput,editTodo])
-
-    const onInputChange =(e)=> {
-        setInput(e.target.value)
-    }
-    const onFormSubmit =(e)=>{
+    const onFormSubmit = (e) => {
         e.preventDefault();
-        if(!editTodo){
-            setTodos([...todos,{id: uuidv4(), title:input}])
-        setInput('')
+        const trimmedInput = input.trim();
+        if (!editTodo && trimmedInput !== '') {
+            setTodos([...todos, { id: uuidv4(), title: trimmedInput }]);
+            setInput('');
+        } else {
+            setErrorMessage('plz enter data');
         }
-        else{
-            updateTodo(input,editTodo.id)
-        }
-        
-    }
+    };
 
-  return (
-    <form onSubmit={onFormSubmit}>
-        <input className='input-field' type="text" placeholder='Enter todo here...' required value={input} onChange={onInputChange} />
-        <button className='btn' type='submit'>ADD</button>
-    </form>
-  )
-}
+    return (
+        <form onSubmit={onFormSubmit}>
+            <input type="text" className='form-input-field' placeholder='Enter todo here...' required value={input} onChange={onInputChange} />
+            <button className='btn' type='submit'><FontAwesomeIcon icon={faPlus} /></button>
+            {errorMessage && <p className='error-message'>{errorMessage}</p>}
+        </form>
+    );
+};
 
-export default Form
+export default Form;

@@ -15,10 +15,11 @@ const getLocalItems =()=>{
 }
 
 const Todo = () => {
-    const [input,setInput] = useState(''); // this is for input 
-  const [todos,setTodos] = useState(getLocalItems()); // this is for todo
-  const [editTodo,setEditTodo] =useState(null);
-  const [isEdit,setIsEdit] = useState(false);
+    const [input,setInput] = useState('');              // this is for input 
+  const [todos,setTodos] = useState(getLocalItems());   // this is for todo
+  const [editTodo,setEditTodo] =useState(null);         // editTodo = this contain edited text and replace with new one.
+  const [isEdit,setIsEdit] = useState(false);           // this is for edit button (true/false)
+  const [errorMessage, setErrorMessage] = useState(''); // this is for display error
 
   useEffect(()=>{
     localStorage.setItem('lists',JSON.stringify(todos))
@@ -36,7 +37,10 @@ const Todo = () => {
           todos = {todos} 
           setTodos = {setTodos} 
           editTodo={editTodo} 
-          setEditTodo={setEditTodo} />
+          setEditTodo={setEditTodo}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
 
         <TodosList 
           todos={todos} 
@@ -46,7 +50,9 @@ const Todo = () => {
           setInput={setInput}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
-          />
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
           </div>
       </div>
     </div>
