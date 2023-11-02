@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { data } from '../staticData/buttonData';
 
 const TodosList = ({ todos, setTodos, editTodo, setEditTodo, isEdit, setIsEdit, errorMessage, setErrorMessage }) => {
   const [editedText, setEditedText] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('All'); // this is for filter the todos
+  const [active, setActive] = useState(null)   // this is for change the color of the buttons on click
 
-  const handleFilter = (filterType) => {
-    setFilter(filterType);
+  const handleFilter = (id,name) => {
+    setFilter(name)
+    setActive(id)
   };
 
   let filteredTodos = todos;
 
-  if (filter === 'completed') {
+  if (filter === 'Completed') {
     filteredTodos = todos.filter(todo => todo.completed);
-  } else if (filter === 'incomplete') {
+  } else if (filter === 'Incomplete') {
     filteredTodos = todos.filter(todo => !todo.completed);
   }
 
@@ -58,20 +61,25 @@ const TodosList = ({ todos, setTodos, editTodo, setEditTodo, isEdit, setIsEdit, 
   return (
     <div>
       <div className='status'>
-        <button className='status-btn' onClick={() => handleFilter('all')}>
-        ALL
-        </button>
-        <button className='status-btn' onClick={() => handleFilter('completed')}>
-        <FontAwesomeIcon icon={faCheck} />
-        </button>
-        <button className='status-btn' onClick={() => handleFilter('incomplete')}>
-        <FontAwesomeIcon icon={faXmark} />
-        </button>
+      {
+        data.map((ele)=>{
+          return(
+            <button className={ele.id===active?"active":"status-btn"} onClick={()=>handleFilter(ele.id,ele.name)} key={ele.id}>{ele.name}</button>
+          )
+        })
+      }
       </div>
       {filteredTodos.map((todo) => (
         <div className='display-todos' key={todo.id}>
           <li className='list'>
             <div className='single-todo'>
+            <div className='checkbox-text'>
+            <input
+                className='check-box'
+                type='checkbox'
+                checked={todo.completed}
+                onChange={() => handleComplete(todo.id)}
+              />
               {isEdit && editTodo === todo.id ? (
                 <input
                   type='text'
@@ -81,13 +89,9 @@ const TodosList = ({ todos, setTodos, editTodo, setEditTodo, isEdit, setIsEdit, 
                 />
               ) : (
                 todo.title
-              )}
-              <input
-                className='check-box'
-                type='checkbox'
-                checked={todo.completed}
-                onChange={() => handleComplete(todo.id)}
-              />
+              )}</div>
+              {todo.completed == true ? <div className='done-msg'>Done</div> :""}
+              
             </div>
             {isEdit && editTodo === todo.id ? (
               <button className='btn' onClick={handleSave}>
