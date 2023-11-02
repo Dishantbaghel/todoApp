@@ -15,7 +15,7 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo,errorMes
         e.preventDefault();
         const trimmedInput = input.trim();
         if (!editTodo && trimmedInput !== '') {
-            setTodos([...todos, { id: uuidv4(), title: trimmedInput }]);
+            setTodos([...todos, { id: uuidv4(), title: trimmedInput, completed:false }]);
             setInput('');
         } else {
             setErrorMessage('plz enter data');

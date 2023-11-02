@@ -20,6 +20,7 @@ const Todo = () => {
   const [editTodo,setEditTodo] =useState(null);         // editTodo = this contain edited text and replace with new one.
   const [isEdit,setIsEdit] = useState(false);           // this is for edit button (true/false)
   const [errorMessage, setErrorMessage] = useState(''); // this is for display error
+  const [completed,setCompleted] =useState(false);
 
   useEffect(()=>{
     localStorage.setItem('lists',JSON.stringify(todos))
@@ -52,6 +53,8 @@ const Todo = () => {
           setIsEdit={setIsEdit}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
+          completed={completed}
+          setCompleted={setCompleted}
         />
           </div>
       </div>

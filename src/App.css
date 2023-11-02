@@ -40,6 +40,23 @@
     border-radius: 15px;
 
   }
+  .status{
+    width: 100%;
+    /* background-color: lightcoral; */
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+  }
+  .status-btn{
+    width: 20%;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #AF7EEB;
+    color: white;
+    margin-left: 10px;
+    border: none;
+  }
   .btn{
     font-size: 20px;
     padding: 10px;
@@ -48,6 +65,11 @@
     color: white;
     margin-left: 10px;
     border: none;
+  }
+
+  .check-box{
+    float: right;
+    margin: 5px;
   }
 
   .btn:hover{
@@ -64,7 +86,7 @@
 
   .todos-input-field{
     border: none;
-    width: 100%;
+    width: 95%;
     border-radius: 15px;
     font-size: 20px;
     padding: 5px;
@@ -84,6 +106,7 @@
     font-size: 25px;
     padding: 5px;
     word-wrap: break-word;
+    display: flex;
   }
 
   .error-message{
@@ -100,8 +123,11 @@
     .single-todo{
       width: 100%;
     }
-    .todos-input-field{
+    .form-input-field{
       width: 100%;
+    }
+    .todos-input-field{
+      width: 95%;
     }
   }
 
@@ -111,5 +137,20 @@
     }
     .btn{
       margin-bottom: 0px;
+    }
+    .status{
+      flex-direction: column;
+      align-items: center;
+    }
+    .status-btn{
+      width: 90%;
+      display: block;
+      margin: 5px;
+    }
+  }
+
+  @media(max-width:550px){
+    .child{
+      width: 80%;
     }
   }
