@@ -1,9 +1,9 @@
 import "./App.css";
-import Todo from "./components/Todo";
+import Home from "./components/Home";
 
 const App = () => {
   return (
-    <Todo/>
+    <Home/>
   )
 }
 
